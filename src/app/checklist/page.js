@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabaseClient'; // Assuming src/lib is aliased to @/lib
+import Navigation from '@/components/Navigation';
 
 // This is the definition of your checklist structure from the frontend.
 // It will be used to seed the database if items don't exist yet.
@@ -276,40 +277,43 @@ export default function ChecklistPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <p className="text-xl text-gray-700">Loading checklist...</p>
-                {/* You could add a spinner here */}
+            <div className="min-h-screen bg-gray-50">
+                <Navigation />
+                <main className="max-w-4xl mx-auto px-6 pb-12 flex items-center justify-center" style={{ minHeight: "70vh" }}>
+                    <p className="text-base text-gray-700">Chargement de la checklist...</p>
+                </main>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-            <main className="max-w-3xl mx-auto">
-                <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
-                    Checklist des Dépenses Immobilières
+        <div className="min-h-screen bg-gray-50">
+            <Navigation />
+            <main className="max-w-4xl mx-auto px-6 pb-12">
+                <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
+                    Checklist des Dépenses
                 </h1>
 
-                <div className="space-y-10">
+                <div className="space-y-4">
                     {checklistSections.map((section) => (
-                        <section key={section.id} className="bg-white shadow-xl rounded-lg p-6">
-                            <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">
+                        <section key={section.id} className="bg-white border border-gray-200 rounded-md p-5">
+                            <h2 className="text-xl font-medium text-gray-800 mb-4 border-b border-gray-100 pb-3">
                                 {section.title}
                             </h2>
-                            <ul className="space-y-4">
+                            <ul className="space-y-3">
                                 {section.items.map((item) => (
                                     <li key={item.id} className="flex items-center">
                                         <input
                                             id={`${section.id}-${item.id}`}
                                             name={`${section.id}-${item.id}`}
                                             type="checkbox"
-                                            checked={item.checked || false} // Ensure checked is always boolean
+                                            checked={item.checked || false}
                                             onChange={() => handleCheckboxChange(section.id, item.id, item.checked)}
-                                            className="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 transition duration-150 ease-in-out cursor-pointer"
+                                            className="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 transition-colors cursor-pointer"
                                         />
                                         <label
                                             htmlFor={`${section.id}-${item.id}`}
-                                            className={`ml-3 block text-md font-medium cursor-pointer ${item.checked ? 'text-gray-500 line-through' : 'text-gray-700'}`}
+                                            className={`ml-3 block text-base cursor-pointer ${item.checked ? 'text-gray-500 line-through' : 'text-gray-700'}`}
                                         >
                                             {item.label}
                                         </label>
@@ -319,7 +323,7 @@ export default function ChecklistPage() {
                         </section>
                     ))}
                 </div>
-                <footer className="mt-16 text-center text-gray-500 text-sm">
+                <footer className="mt-10 text-center text-gray-500 text-sm">
                     <p>&copy; {new Date().getFullYear()} Gestion Immobilière Simplifiée. Tous droits réservés.</p>
                 </footer>
             </main>
