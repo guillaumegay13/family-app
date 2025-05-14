@@ -99,7 +99,7 @@ export default function DailyTodoPage() {
             await fetchTodos();
         } catch (error) {
             console.error("Error adding task:", error);
-            setErrorTodos(`Échec de l'ajout de la tâche: ${error.message}`);
+            setErrorTodos(`Échec de l&apos;ajout de la tâche: ${error.message}`);
         }
     };
 
@@ -194,7 +194,7 @@ export default function DailyTodoPage() {
                     {isLoadingTodos ? (
                         <p className="text-center text-base text-gray-500 py-4 bg-white rounded-md border border-gray-200">Chargement des tâches...</p>
                     ) : todos.length === 0 && !errorTodos ? (
-                        <p className="text-center text-base text-gray-500 py-4 bg-white rounded-md border border-gray-200">Aucune tâche pour l'instant</p>
+                        <p className="text-center text-base text-gray-500 py-4 bg-white rounded-md border border-gray-200">Aucune tâche pour l&apos;instant</p>
                     ) : (
                         <ul className="space-y-3">
                             {todos.map(todo => (

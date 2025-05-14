@@ -52,7 +52,7 @@ export default function Home() {
         setNewMemberName('');
       } catch (error) {
         console.error("Error adding family member:", error);
-        setErrorMembers("Impossible d'ajouter le membre de la famille. Le nom est-il unique?");
+        setErrorMembers("Impossible d&apos;ajouter le membre de la famille. Le nom est-il unique?");
       }
     } else if (familyMembers.includes(trimmedName)) {
       setErrorMembers("Ce membre existe déjà.");
@@ -110,7 +110,7 @@ export default function Home() {
           {isLoadingMembers && familyMembers.length === 0 ? (
             <p className="text-base text-gray-500 text-left">Chargement des membres...</p>
           ) : !isLoadingMembers && familyMembers.length === 0 && !errorMembers ? (
-            <p className="text-base text-gray-500 text-left">Aucun membre de famille ajouté pour l'instant.</p>
+            <p className="text-base text-gray-500 text-left">Aucun membre de famille ajouté pour l&apos;instant.</p>
           ) : (
             <ul className="space-y-3 text-left">
               {familyMembers.map(member => (
